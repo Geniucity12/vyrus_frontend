@@ -58,6 +58,9 @@ function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [showWalletModal, setShowWalletModal] = useState(false);
+  const [showCheckRoleModal, setShowCheckRoleModal] = useState(false);
+  const [checkRoleWallet, setCheckRoleWallet] = useState("");
+  const [checkRoleResult, setCheckRoleResult] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
   const [walletInput, setWalletInput] = useState("");
   const [walletStatus, setWalletStatus] = useState<string | null>(null);
@@ -173,6 +176,24 @@ function App() {
     }
   };
 
+  // ETH wallet validation (simple regex)
+  function isEthWallet(addr: string) {
+    return /^0x[a-fA-F0-9]{40}$/.test(addr.trim());
+  }
+
+  // Simulate role check (replace with backend call later)
+  const handleCheckRole = () => {
+    setCheckRoleResult(null);
+    if (!isEthWallet(checkRoleWallet)) {
+      setCheckRoleResult("Please enter a valid ETH wallet address.");
+      return;
+    }
+    // Simulate: if wallet is in allowlist (replace with backend call)
+    // For now, always not corrupted
+    setCheckRoleResult("This wallet is NOT CORRUPTED (not on allowlist yet).");
+    // Example: setCheckRoleResult("You are CORRUPTED!");
+  };
+
   return (
     <div className="vyrus-app">
       {/* Top Navigation */}
@@ -181,7 +202,7 @@ function App() {
         <div className="nav-links">
           {/* <a href="#gallery">GALLERY</a> */}
           <a href="#tasks" onClick={e => { e.preventDefault(); document.getElementById("tasks")?.scrollIntoView({ behavior: "smooth" }); }}>APPLY WL</a>
-          <a href="#role">CHECK ROLE</a>
+          <a href="#role" onClick={e => { e.preventDefault(); setShowCheckRoleModal(true); }}>CHECK ROLE</a>
           {/* <a href="#tba">TBA</a> */}
         </div>
       </nav>
@@ -198,7 +219,7 @@ function App() {
           <p>
             474 low poly corrupted JPEGs.
             <br />
-            Complete tasks. Earn your spot on the allowlist.
+            Complete tasks. Earn your spot to become corrupted.
           </p>
           <button
             className="cta-primary"
@@ -225,8 +246,47 @@ function App() {
       {/* pill navigation - for mockup sideway animation */}
       <div className="pill-nav">
         {/* <div className="pill active">GALLERY</div> */}
-        <div className="pill">APPLY WL</div>
-        <div className="pill">CHECK ROLE</div>
+        <div className="pill" onClick={() => document.getElementById("tasks")?.scrollIntoView({ behavior: "smooth" })} style={{cursor:'pointer'}}>APPLY WL</div>
+        <div className="pill" onClick={() => setShowCheckRoleModal(true)} style={{cursor:'pointer'}}>CHECK ROLE</div>
+              {/* Check Role Modal */}
+              {showCheckRoleModal && (
+                <div className="modal" onClick={() => setShowCheckRoleModal(false)}>
+                  <div className="modal-content" onClick={e => e.stopPropagation()}>
+                    <h3>Check Role</h3>
+                    <input
+                      type="text"
+                      placeholder="Enter your ETH wallet address"
+                      value={checkRoleWallet}
+                      onChange={e => setCheckRoleWallet(e.target.value)}
+                      style={{ width: "100%", marginBottom: 12, padding: 8 }}
+                    />
+                    <button
+                      className="cta-primary"
+                      onClick={handleCheckRole}
+                      style={{marginRight:8}}
+                    >
+                      Check
+                    </button>
+                    <button
+                      onClick={() => setShowCheckRoleModal(false)}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        color: "#888",
+                        marginLeft: 8,
+                        cursor: "pointer",
+                      }}
+                    >
+                      Close
+                    </button>
+                    {checkRoleResult && (
+                      <div style={{ color: checkRoleResult.includes("CORRUPTED") ? "#ff1744" : "#fff", marginTop: 12, fontWeight: 500 }}>
+                        {checkRoleResult}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
         {/* <div className="pill">TBA</div> */}
       </div>
 
