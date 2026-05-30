@@ -290,15 +290,6 @@ function App() {
         {/* <div className="pill">TBA</div> */}
       </div>
 
-      {/* glowing silhouette grid - from pt_1.PNG */}
-      <section className="grid-section">
-        <div className="grid-title">ALLOWLIST SPOTS - 6 CONFIRMED</div>
-        <div className="silhouette-grid">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className={`silhouette ${i < 3 ? "filled" : ""}`} />
-          ))}
-        </div>
-      </section>
 
       {/* tasks */}
       <section id="tasks" className="tasks-section">
