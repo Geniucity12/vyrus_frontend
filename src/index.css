@@ -1,0 +1,71 @@
+/* ============================================
+   VYRUS NFTS — Allowlist Site
+   Dark, moody theme matching pt_1.PNG mockups
+   ============================================ */
+
+:root {
+  /* Core dark palette from mockups */
+  --bg: #0a0a0c;
+  --bg-elevated: #111113;
+  --bg-card: #1a181b;
+  --text: #a1a1aa;
+  --text-h: #f4f4f5;
+  --border: #27272a;
+  --accent: #ff2e5f;        /* Hot pink/red from PROCEED buttons */
+  --accent-glow: rgba(255, 46, 95, 0.3);
+  --glow-red: #ff4d4d;
+  --glow-orange: #ff8a3d;
+
+  /* Character mood backgrounds (from mockups) */
+  --yellow-mood: #f4d35e;
+  --red-mood: #3f2a2a;
+  --pink-mood: #f8b4c4;
+
+  /* Typography */
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  font: 16px/1.5 var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#root {
+  min-height: 100svh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: var(--heading);
+  font-weight: 600;
+  color: var(--text-h);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: 42px; margin: 0 0 12px; }
+h2 { font-size: 26px; margin: 0 0 16px; }
+h3 { font-size: 18px; margin: 0 0 8px; }
+
+p { margin: 0 0 12px; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Utility */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
